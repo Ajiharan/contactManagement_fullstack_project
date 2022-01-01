@@ -19,6 +19,10 @@ const contactSchema = new Schema({
     required: true,
     type: String,
   },
+  count: {
+    required: true,
+    type: Number,
+  },
 });
 
 export const ContactsSchema = mongoose.model("ContactsSchema", contactSchema);
