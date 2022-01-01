@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 const Header = () => {
+  console.log("header");
   return (
     <NavbarTop>
       <div className="navbarTop__container">
