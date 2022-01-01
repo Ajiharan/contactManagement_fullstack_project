@@ -7,7 +7,7 @@ import {
 import contactsReducer from "./contact/ContactSlice";
 
 const appReducer = combineReducers({
-  contacts: contactsReducer,
+  contact: contactsReducer,
 });
 
 const rootReducer = (state, action) => {

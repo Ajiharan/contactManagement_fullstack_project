@@ -69,7 +69,7 @@ router.get("/getData/:count", async (req, res) => {
   try {
     const count = req.params.count;
     const fetchData = await ContactsSchema.find({
-      count: { $lte: count + 10, $gt: count },
+      count: { $lte: count + 10, $gte: count },
     });
     return res.status(200).json(fetchData);
   } catch (err) {

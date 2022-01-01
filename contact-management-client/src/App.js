@@ -2,7 +2,14 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./header/Header";
 import Home from "./home/Home";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllContactsDetails } from "./state-management/contact/ContactAction";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllContactsDetails(0));
+  }, []);
   return (
     <div className="App">
       <Header />
