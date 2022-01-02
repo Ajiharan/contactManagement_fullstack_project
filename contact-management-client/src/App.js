@@ -1,6 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./header/Header";
+import "react-loading-skeleton/dist/skeleton.css";
 import Home from "./home/Home";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";

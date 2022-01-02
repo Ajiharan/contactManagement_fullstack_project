@@ -1,37 +1,48 @@
 import React from "react";
 import styled from "styled-components";
+import SkeletonContainer from "../common/SkeletonContainer";
 
-const ContactTable = ({ contactDatas }) => {
+const ContactTable = ({ contactDatas, loading }) => {
   return (
     <ListContainer>
-      <div className="Product__list m-4 p-1">
-        {contactDatas.map((res) => (
-          <ConactListRow key={res._id}>
-            <div className="left">
-              <h5>{res.name}</h5>
-              <p>
-                {res.email}
-                {res?.address && `-------[${res.address}]`}
-              </p>
-              {res?.phoneNo && <p>phone No :- {res.phoneNo}</p>}
-            </div>
-            <div className="right">
-              <button className="btn btn-small btn-danger">select</button>
-            </div>
-          </ConactListRow>
-        ))}
-      </div>
+      {loading ? (
+        <div className="skeletonCon">
+          <SkeletonContainer count={8} />
+        </div>
+      ) : (
+        <div className="Product__list m-4 p-1">
+          {contactDatas.map((res) => (
+            <ConactListRow key={res._id}>
+              <div className="left">
+                <h5>{res.name}</h5>
+                <p>
+                  {res.email}
+                  {res?.address && `-------[${res.address}]`}
+                </p>
+                {res?.phoneNo && <p>phone No :- {res.phoneNo}</p>}
+              </div>
+              <div className="right">
+                <button className="btn btn-small btn-danger">select</button>
+              </div>
+            </ConactListRow>
+          ))}
+        </div>
+      )}
     </ListContainer>
   );
 };
 
 const ListContainer = styled.div`
   width: 50%;
+
+  .skeletonCon {
+    padding: 1rem;
+  }
 `;
 
 const ConactListRow = styled.div`
   background-color: rgb(250, 171, 25) !important;
-  color: white;
+
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25),
     -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
 

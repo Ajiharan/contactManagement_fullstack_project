@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   contactData: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -33,7 +33,7 @@ export const { getContactsFailure, getContactsLoading, getContactsSucess } =
 
 export const selectContactsDetails = (state) => state?.contact?.contactData;
 
-export const selectContactsLoading = (state) => state.contact.loading;
+export const selectContactsLoading = (state) => state?.contact?.loading;
 
 export const selectContactsError = (state) => state.contact.error;
 export default contactSlice.reducer;

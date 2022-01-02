@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getAllContactsDetails } from "../state-management/contact/ContactAction";
-import { selectContactsDetails } from "../state-management/contact/ContactSlice";
+import {
+  selectContactsDetails,
+  selectContactsLoading,
+} from "../state-management/contact/ContactSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ContactModal from "../modal/ContactModal";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -8,16 +11,27 @@ import ContactTable from "./ContactTable";
 import styled from "styled-components";
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
-  const [contactDatas, setContactDatas] = useState([]);
+
   const contactDetails = useSelector(selectContactsDetails);
+  const contactLoading = useSelector(selectContactsLoading);
+  const [contactDatas, setContactDatas] = useState(contactDetails);
+  const [loading, setLoading] = useState(contactLoading);
 
   useEffect(() => {
-    console.log("contact details", contactDetails);
     setContactDatas(contactDetails);
   }, [contactDetails]);
 
+  useEffect(() => {
+    setLoading(contactLoading);
+  }, [contactLoading]);
+
   const handleClose = () => {
     setShowModal(false);
+  };
+
+  const checkVal = () => {
+    console.log("contactLoading", contactLoading);
+    console.log("contact details", contactDetails);
   };
   const ViewProductModal = (props) => {
     return <ContactModal show={showModal} handleClose={handleClose} />;
@@ -26,9 +40,10 @@ const Home = () => {
     <HomeContainer>
       <div className="contactContainer">
         <div className="contactHeader">
-          {contactDatas?.length === 0 && (
+          {contactDatas?.length === 0 && !loading && (
             <h5 className="text-center text-light fw-b m-4 bg-danger p-3">
               contacts are not available now please add some contacts
+              {checkVal()}
             </h5>
           )}
           <div
@@ -43,7 +58,7 @@ const Home = () => {
             </span>
           </div>
         </div>
-        <ContactTable contactDatas={contactDatas} />
+        <ContactTable contactDatas={contactDatas} loading={loading} />
 
         {showModal && ViewProductModal()}
       </div>
