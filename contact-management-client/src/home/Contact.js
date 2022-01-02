@@ -7,7 +7,12 @@ import FormField from "../common/FormField";
 
 const Contact = ({ isAdd, contactData, handleClose }) => {
   const [loading, setLoading] = useState(false);
-  const { formik, deleteContact } = useContactHandler(isAdd, handleClose);
+  const { formik, deleteContact } = useContactHandler(
+    isAdd,
+    handleClose,
+    loading,
+    setLoading
+  );
 
   const error = useSelector(selectContactsError);
 
@@ -23,10 +28,11 @@ const Contact = ({ isAdd, contactData, handleClose }) => {
   }, [contactData]);
 
   const loadModal = () => {
-    return <Model show={loading} message="Uploading your data ..." />;
+    return <Model show={loading} message="loading ..." />;
   };
 
   const handleRemove = (id) => {
+    setLoading(true);
     deleteContact(id);
   };
 

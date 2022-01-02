@@ -18,6 +18,7 @@ const SearchField = ({ handleSearch }) => {
           <input
             type="text"
             className="search__input"
+            placeholder="search by name,email,phoneNo"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />

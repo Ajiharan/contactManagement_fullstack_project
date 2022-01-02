@@ -61,6 +61,12 @@ const ContactTable = ({ contactDatas, loading }) => {
 
 const ListContainer = styled.div`
   width: 50%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 70vh;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   .skeletonCon {
     padding: 1rem;
@@ -85,4 +91,4 @@ const ConactListRow = styled.div`
   }
 `;
 
-export default ContactTable;
+export default React.memo(ContactTable);

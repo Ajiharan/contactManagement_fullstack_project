@@ -1,18 +1,18 @@
-.loadingResetModal .modal-content {
+.loadingContactModal .modal-content {
   margin-top: 15rem;
   min-height: 48vh !important;
 }
-.loadingResetModal .modalContainer__body {
+.loadingContactModal .modalContainer__body {
   display: flex;
   height: 100%;
   flex-direction: column;
   align-items: center;
 }
-.loadingResetModal .modal-header {
+.loadingContactModal .modal-header {
   background-color: orange;
 }
 
-.loadingResetModal .btn-close {
+.loadingContactModal .btn-close {
   border: none;
   width: 40px;
   height: 33px;
@@ -26,6 +26,6 @@
   transition: all 0.42s ease-in;
 }
 
-.loadingResetModal .btn-close:hover {
+.loadingContactModal .btn-close:hover {
   background-color: rgb(241, 162, 15);
 }

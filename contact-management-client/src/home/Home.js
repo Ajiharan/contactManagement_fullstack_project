@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getAllSearchDetails } from "../state-management/contact/ContactAction";
+import {
+  getAllSearchDetails,
+  getAllContactsDetails,
+} from "../state-management/contact/ContactAction";
 import {
   selectContactsDetails,
   selectContactsLoading,
 } from "../state-management/contact/ContactSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ContactModal from "../modal/ContactModal";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+
 import ContactTable from "./ContactTable";
 import styled from "styled-components";
 import SearchField from "../common/SearchField";
+import AnimationButton from "../common/AnimationButton";
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const contactDetails = useSelector(selectContactsDetails);
@@ -46,22 +50,25 @@ const Home = () => {
     const { inputValue, searchType } = searchValue;
     dispatch(getAllSearchDetails({ type: searchType, value: inputValue }));
   };
+
+  const handleReset = () => {
+    dispatch(getAllContactsDetails(0));
+  };
   return (
     <HomeContainer>
       <div className="contactContainer">
         <div className="contactHeader">
           <div className="headerFields">
-            <div
-              className="addButton"
-              onClick={() => {
-                setShowModal(true);
-              }}
-            >
-              <AddCircleIcon className="text-light bg-warning" />
-              <span className="text-warning text-lead fw-bold m-1 logName">
-                Add Contact
-              </span>
-            </div>
+            <AnimationButton
+              name={"Add product"}
+              setShowModal={setShowModal}
+              isReset={false}
+            />
+            <AnimationButton
+              name={"Reset Data"}
+              isReset={true}
+              resetContactData={handleReset}
+            />
             <SearchField handleSearch={handleSearch} />
           </div>
           {contactDatas?.length === 0 && !loading && (
@@ -82,36 +89,6 @@ const HomeContainer = styled.div`
   .headerFields {
     display: flex;
     align-items: center;
-  }
-  .addButton {
-    width: 15rem;
-
-    border: 2px solid orange;
-    padding: 10px;
-    margin: 2rem;
-
-    cursor: pointer;
-    transition: all 0.32s ease-out;
-    &:hover {
-      background-color: rgb(250, 171, 25) !important;
-      color: white;
-      box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25),
-        -6px -6px 10px 0 rgba(255, 255, 255, 0.3);
-    }
-    &:hover .logName {
-      color: white !important;
-    }
-    .MuiSvgIcon-root {
-      font-size: 1.7rem;
-      padding: 5px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.34s ease-in;
-    }
-    &:hover .MuiSvgIcon-root {
-      box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, 0.25),
-        -4px -4px 7px 0 rgba(255, 255, 255, 0.3);
-    }
   }
 `;
 

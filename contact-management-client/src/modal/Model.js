@@ -6,31 +6,30 @@ const Model = ({
   message = "Please wait we are checking your creditionals...",
   width = "100%",
 }) => {
-  console.log("Model");
   return (
-    <ModalContainer>
-      <Modal
-        show={show}
-        backdrop="static"
-        keyboard={false}
-        centered
-        dialogClassName="loadingModal"
-        style={{ width: width }}
-      >
-        <Modal.Body>
-          <div className="modalContainer__body">
-            <Spinner animation="border" role="status" className="text-warning">
-              <span className="sr-only">Loading...</span>
-            </Spinner>
-            <p className="text-lead fw-bold text-warning">{message}</p>
-          </div>
-        </Modal.Body>
-      </Modal>
+    <ModalContainer
+      show={show}
+      backdrop="static"
+      keyboard={false}
+      centered
+      dialogClassName="loadingModal"
+      style={{ width: width }}
+    >
+      <Modal.Body>
+        <div className="modalContainer__body">
+          <Spinner
+            animation="border"
+            role="status"
+            className="text-warning"
+          ></Spinner>
+          <p className="text-lead fw-bold text-warning">{message}</p>
+        </div>
+      </Modal.Body>
     </ModalContainer>
   );
 };
 
-const ModalContainer = styled.div`
+const ModalContainer = styled(Modal)`
   .loadingModal {
     .modal-content {
       margin-top: 10rem;

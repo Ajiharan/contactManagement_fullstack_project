@@ -3,7 +3,6 @@ import { Modal } from "react-bootstrap";
 import Contact from "../home/Contact";
 import "./ContactModal.css";
 const ContactModal = ({ show, handleClose, heading, isAdd, contactData }) => {
-  console.log("ContactModal");
   return (
     <Modal
       show={show}
@@ -11,7 +10,7 @@ const ContactModal = ({ show, handleClose, heading, isAdd, contactData }) => {
       backdrop="static"
       keyboard={false}
       centered
-      dialogClassName="loadingResetModal"
+      dialogClassName="loadingContactModal"
     >
       <Modal.Header closeButton>
         <Modal.Title className="text-light text-uppercase">

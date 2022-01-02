@@ -5,16 +5,18 @@ import axios from "../Axios";
 import { useDispatch } from "react-redux";
 import { getAllContactsDetails } from "../state-management/contact/ContactAction";
 
-const useContactHandler = (isAdd, handleClose) => {
+const useContactHandler = (isAdd, handleClose, loading, setLoading) => {
   const postData = (path, data, resetForm) => {
     axios
       .post(path, data)
       .then((res) => {
+        setLoading(false);
         resetForm();
         toast.success(" data sucessfully added");
         dispatch(getAllContactsDetails(0));
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err?.response?.data);
         resetForm();
       });
@@ -24,12 +26,14 @@ const useContactHandler = (isAdd, handleClose) => {
     axios
       .put(path, data)
       .then((res) => {
+        setLoading(false);
         resetForm();
         toast.success(" data sucessfully updated");
         dispatch(getAllContactsDetails(0));
         handleClose();
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err?.response?.data);
         resetForm();
         handleClose();
@@ -56,6 +60,7 @@ const useContactHandler = (isAdd, handleClose) => {
       cid: Yup.string(),
     }),
     onSubmit: (values, { resetForm }) => {
+      setLoading(true);
       const updateValues = Object.fromEntries(
         Object.entries(values).filter((r) => Boolean(r[1]))
       );
@@ -74,11 +79,13 @@ const useContactHandler = (isAdd, handleClose) => {
     axios
       .delete(`contact/delete/${id}`)
       .then((res) => {
-        toast.warning(" data sucessfully deleted");
+        setLoading(false);
+        toast.error(" data sucessfully deleted");
         dispatch(getAllContactsDetails(0));
         handleClose();
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err?.response?.data);
         handleClose();
       });
