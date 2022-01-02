@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllContactsDetails } from "../state-management/contact/ContactAction";
+import { getAllSearchDetails } from "../state-management/contact/ContactAction";
 import {
   selectContactsDetails,
   selectContactsLoading,
@@ -9,12 +9,15 @@ import ContactModal from "../modal/ContactModal";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ContactTable from "./ContactTable";
 import styled from "styled-components";
+import SearchField from "../common/SearchField";
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const contactDetails = useSelector(selectContactsDetails);
   const contactLoading = useSelector(selectContactsLoading);
   const [contactDatas, setContactDatas] = useState(contactDetails);
   const [loading, setLoading] = useState(contactLoading);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setContactDatas(contactDetails);
@@ -38,26 +41,34 @@ const Home = () => {
       />
     );
   };
+
+  const handleSearch = (searchValue) => {
+    const { inputValue, searchType } = searchValue;
+    dispatch(getAllSearchDetails({ type: searchType, value: inputValue }));
+  };
   return (
     <HomeContainer>
       <div className="contactContainer">
         <div className="contactHeader">
+          <div className="headerFields">
+            <div
+              className="addButton"
+              onClick={() => {
+                setShowModal(true);
+              }}
+            >
+              <AddCircleIcon className="text-light bg-warning" />
+              <span className="text-warning text-lead fw-bold m-1 logName">
+                Add Contact
+              </span>
+            </div>
+            <SearchField handleSearch={handleSearch} />
+          </div>
           {contactDatas?.length === 0 && !loading && (
             <h5 className="text-center text-light fw-b m-4 bg-danger p-3">
-              contacts are not available now please add some contacts
+              No results found yet..
             </h5>
           )}
-          <div
-            className="addButton"
-            onClick={() => {
-              setShowModal(true);
-            }}
-          >
-            <AddCircleIcon className="text-light bg-warning" />
-            <span className="text-warning text-lead fw-bold m-1 logName">
-              Add Contact
-            </span>
-          </div>
         </div>
         <ContactTable contactDatas={contactDatas} loading={loading} />
 
@@ -68,6 +79,10 @@ const Home = () => {
 };
 
 const HomeContainer = styled.div`
+  .headerFields {
+    display: flex;
+    align-items: center;
+  }
   .addButton {
     width: 15rem;
 

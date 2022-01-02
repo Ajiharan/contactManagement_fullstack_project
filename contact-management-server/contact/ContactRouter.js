@@ -30,13 +30,32 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.delete("/del/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    console.log("id : ", id);
+
     const deleteData = await ContactsSchema.findByIdAndRemove(id);
     if (!deleteData) return res.status(400).json("record does not exists");
     return res.status(200).json(deleteData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post("/search", async (req, res) => {
+  try {
+    const { type, value } = req.body;
+    let keyValue = value;
+    if (type === "phoneNo") {
+      keyValue = Number(value);
+      if (!keyValue) {
+        return res.status(200).json([]);
+      }
+    }
+    const isContactExists = await ContactsSchema.find({
+      [type]: keyValue,
+    });
+    return res.status(200).json(isContactExists);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -69,7 +88,7 @@ router.get("/getData/:count", async (req, res) => {
   try {
     const count = req.params.count;
     const fetchData = await ContactsSchema.find({
-      count: { $lte: count + 10, $gte: count },
+      count: { $gte: count },
     });
     return res.status(200).json(fetchData);
   } catch (err) {

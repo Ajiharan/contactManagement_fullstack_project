@@ -7,20 +7,27 @@ import FormField from "../common/FormField";
 
 const Contact = ({ isAdd, contactData, handleClose }) => {
   const [loading, setLoading] = useState(false);
-  const { formik } = useContactHandler(isAdd, handleClose);
+  const { formik, deleteContact } = useContactHandler(isAdd, handleClose);
 
   const error = useSelector(selectContactsError);
 
   useEffect(() => {
-    console.log("contactData", contactData);
     if (contactData) {
-      const { _id, ...rest } = contactData;
+      const { _id, ...rest } = Object.fromEntries(
+        Object.entries(contactData).map((r) => {
+          return [r[0], Boolean(r[1]) ? r[1] : ""];
+        })
+      );
       formik.setValues({ ...rest, cid: _id });
     }
   }, [contactData]);
 
   const loadModal = () => {
     return <Model show={loading} message="Uploading your data ..." />;
+  };
+
+  const handleRemove = (id) => {
+    deleteContact(id);
   };
 
   const checkFormType = (isAdd) =>
@@ -35,7 +42,13 @@ const Contact = ({ isAdd, contactData, handleClose }) => {
         <button className="btn btn-success" type="submit">
           Update Contact
         </button>
-        <button className="btn btn-danger" type="submit">
+        <button
+          onClick={() => {
+            handleRemove(contactData?._id);
+          }}
+          className="btn btn-danger"
+          type="button"
+        >
           Delete Contact
         </button>
       </div>
@@ -50,7 +63,7 @@ const Contact = ({ isAdd, contactData, handleClose }) => {
         onSubmit={formik.handleSubmit}
       >
         <input
-          type="text"
+          type="hidden"
           name="cid"
           className="form-control"
           {...formik.getFieldProps("cid")}

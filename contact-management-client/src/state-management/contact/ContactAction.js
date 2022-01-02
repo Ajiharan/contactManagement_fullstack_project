@@ -10,7 +10,6 @@ const getAllContactsDetails = (count) => (dispatch) => {
   axios
     .get(`contact/getData/${count}`)
     .then((res) => {
-      console.log(res.data);
       dispatch(
         getContactsSucess({
           data: res.data,
@@ -26,4 +25,24 @@ const getAllContactsDetails = (count) => (dispatch) => {
     });
 };
 
-export { getAllContactsDetails };
+const getAllSearchDetails = (searchData) => (dispatch) => {
+  dispatch(getContactsLoading());
+  axios
+    .post("contact/search", searchData)
+    .then((res) => {
+      dispatch(
+        getContactsSucess({
+          data: res.data,
+        })
+      );
+    })
+    .catch((err) => {
+      dispatch(
+        getContactsFailure({
+          error: err.response,
+        })
+      );
+    });
+};
+
+export { getAllContactsDetails, getAllSearchDetails };

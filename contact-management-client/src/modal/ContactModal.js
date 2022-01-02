@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import Contact from "../home/Contact";
 import "./ContactModal.css";
 const ContactModal = ({ show, handleClose, heading, isAdd, contactData }) => {
-  console.log("ContactModal", contactData);
+  console.log("ContactModal");
   return (
     <Modal
       show={show}

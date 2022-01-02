@@ -25,7 +25,7 @@ const useContactHandler = (isAdd, handleClose) => {
       .put(path, data)
       .then((res) => {
         resetForm();
-        toast.success(" data sucessfully added");
+        toast.success(" data sucessfully updated");
         dispatch(getAllContactsDetails(0));
         handleClose();
       })
@@ -70,7 +70,21 @@ const useContactHandler = (isAdd, handleClose) => {
     },
   });
 
-  return { formik };
+  const deleteContact = (id) => {
+    axios
+      .delete(`contact/delete/${id}`)
+      .then((res) => {
+        toast.warning(" data sucessfully deleted");
+        dispatch(getAllContactsDetails(0));
+        handleClose();
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data);
+        handleClose();
+      });
+  };
+
+  return { formik, deleteContact };
 };
 
 export default useContactHandler;
