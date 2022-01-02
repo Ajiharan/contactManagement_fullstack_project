@@ -11,7 +11,6 @@ import ContactTable from "./ContactTable";
 import styled from "styled-components";
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
-
   const contactDetails = useSelector(selectContactsDetails);
   const contactLoading = useSelector(selectContactsLoading);
   const [contactDatas, setContactDatas] = useState(contactDetails);
@@ -29,12 +28,15 @@ const Home = () => {
     setShowModal(false);
   };
 
-  const checkVal = () => {
-    console.log("contactLoading", contactLoading);
-    console.log("contact details", contactDetails);
-  };
-  const ViewProductModal = (props) => {
-    return <ContactModal show={showModal} handleClose={handleClose} />;
+  const ViewContactModal = () => {
+    return (
+      <ContactModal
+        show={showModal}
+        handleClose={handleClose}
+        heading={"CONTACT FORM"}
+        isAdd={true}
+      />
+    );
   };
   return (
     <HomeContainer>
@@ -43,7 +45,6 @@ const Home = () => {
           {contactDatas?.length === 0 && !loading && (
             <h5 className="text-center text-light fw-b m-4 bg-danger p-3">
               contacts are not available now please add some contacts
-              {checkVal()}
             </h5>
           )}
           <div
@@ -60,7 +61,7 @@ const Home = () => {
         </div>
         <ContactTable contactDatas={contactDatas} loading={loading} />
 
-        {showModal && ViewProductModal()}
+        {showModal && ViewContactModal()}
       </div>
     </HomeContainer>
   );

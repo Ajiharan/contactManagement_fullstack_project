@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SkeletonContainer from "../common/SkeletonContainer";
+import ContactModal from "../modal/ContactModal";
 
 const ContactTable = ({ contactDatas, loading }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [contactData, setContactData] = useState(null);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+  const ViewContactModal = () => (
+    <ContactModal
+      show={showModal}
+      handleClose={handleClose}
+      heading={"CONTACT UPDATE FORM"}
+      isAdd={false}
+      contactData={contactData}
+    />
+  );
+
   return (
     <ListContainer>
       {loading ? (
@@ -22,12 +40,21 @@ const ContactTable = ({ contactDatas, loading }) => {
                 {res?.phoneNo && <p>phone No :- {res.phoneNo}</p>}
               </div>
               <div className="right">
-                <button className="btn btn-small btn-danger">select</button>
+                <button
+                  className="btn btn-small btn-danger"
+                  onClick={() => {
+                    setShowModal(true);
+                    setContactData(res);
+                  }}
+                >
+                  select
+                </button>
               </div>
             </ConactListRow>
           ))}
         </div>
       )}
+      {showModal && ViewContactModal()}
     </ListContainer>
   );
 };
