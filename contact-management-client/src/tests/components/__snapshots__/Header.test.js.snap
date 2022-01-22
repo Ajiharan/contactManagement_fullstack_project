@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test header component 1`] = `
+<styled.div>
+  <div
+    className="navbarTop__container"
+  >
+    <h2
+      className="text-center"
+    >
+      Contact Management System
+    </h2>
+  </div>
+</styled.div>
+`;

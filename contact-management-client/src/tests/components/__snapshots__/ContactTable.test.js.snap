@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test Contact Table as empty props component 1`] = `
+<styled.div>
+  <div
+    className="Product__list m-4 p-1"
+  />
+</styled.div>
+`;
+
+exports[`should test Contact Table as valid props component 1`] = `
+<styled.div>
+  <div
+    className="Product__list m-4 p-1"
+  >
+    <styled.div
+      key="bb001245"
+    >
+      <div
+        className="left"
+      >
+        <h5>
+          user
+        </h5>
+        <p>
+          test@gmail.com
+        </p>
+      </div>
+      <div
+        className="right"
+      >
+        <button
+          className="btn btn-small btn-danger"
+          onClick={[Function]}
+        >
+          select
+        </button>
+      </div>
+    </styled.div>
+  </div>
+</styled.div>
+`;
