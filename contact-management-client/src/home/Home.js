@@ -14,6 +14,7 @@ import ContactTable from "./ContactTable";
 import styled from "styled-components";
 import SearchField from "../common/SearchField";
 import AnimationButton from "../common/AnimationButton";
+import ErrorBoundary from "../Error/ErrorBoundary ";
 const Home = () => {
   const contactDetails = useSelector(selectContactsDetails);
   const contactLoading = useSelector(selectContactsLoading);
@@ -85,7 +86,9 @@ const Home = () => {
             </h5>
           )}
         </div>
-        <ContactTable contactDatas={contactDatas} loading={loading} />
+        <ErrorBoundary>
+          <ContactTable contactDatas={contactDatas} loading={loading} />
+        </ErrorBoundary>
 
         {showModal && ViewContactModal()}
       </div>

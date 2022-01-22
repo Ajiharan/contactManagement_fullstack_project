@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 import { Form } from "react-bootstrap";
 const SearchField = ({ handleSearch }) => {
+  console.log("search field");
   const [inputValue, setInputValue] = useState("");
   const [searchType, setSearchType] = useState("name");
   const handleSubmit = (e) => {
@@ -67,4 +68,4 @@ const SearchFieldContainer = styled.div`
     }
   }
 `;
-export default SearchField;
+export default React.memo(SearchField);
