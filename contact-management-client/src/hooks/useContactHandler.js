@@ -79,7 +79,9 @@ const useContactHandler = (isAdd, handleClose, loading, setLoading) => {
     axios
       .delete(`contact/delete/${id}`)
       .then((res) => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        });
         toast.error(" data sucessfully deleted");
         dispatch(getAllContactsDetails(0));
         handleClose();

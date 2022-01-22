@@ -3,6 +3,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import styled from "styled-components";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 const AnimationButton = ({ setShowModal, name, isReset, resetContactData }) => {
+  console.log("animation ");
   return (
     <AnimationButtonContainer>
       <div
@@ -57,4 +58,4 @@ const AnimationButtonContainer = styled.div`
   }
 `;
 
-export default AnimationButton;
+export default React.memo(AnimationButton);

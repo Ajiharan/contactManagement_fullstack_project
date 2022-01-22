@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   getAllSearchDetails,
   getAllContactsDetails,
@@ -15,9 +15,9 @@ import styled from "styled-components";
 import SearchField from "../common/SearchField";
 import AnimationButton from "../common/AnimationButton";
 const Home = () => {
-  const [showModal, setShowModal] = useState(false);
   const contactDetails = useSelector(selectContactsDetails);
   const contactLoading = useSelector(selectContactsLoading);
+  const [showModal, setShowModal] = useState(false);
   const [contactDatas, setContactDatas] = useState(contactDetails);
   const [loading, setLoading] = useState(contactLoading);
 
@@ -51,9 +51,14 @@ const Home = () => {
     dispatch(getAllSearchDetails({ type: searchType, value: inputValue }));
   };
 
-  const handleReset = () => {
+  const setModalShow = useCallback((value) => {
+    setShowModal(value);
+  }, []);
+
+  const handleReset = useCallback(() => {
     dispatch(getAllContactsDetails(0));
-  };
+  }, [dispatch]);
+
   return (
     <HomeContainer>
       <div className="contactContainer">
@@ -61,7 +66,7 @@ const Home = () => {
           <div className="headerFields">
             <AnimationButton
               name={"Add product"}
-              setShowModal={setShowModal}
+              setShowModal={setModalShow}
               isReset={false}
             />
             <AnimationButton

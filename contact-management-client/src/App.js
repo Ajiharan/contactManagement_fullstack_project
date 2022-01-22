@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllContactsDetails } from "./state-management/contact/ContactAction";
 import { Toaster } from "react-hot-toast";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {

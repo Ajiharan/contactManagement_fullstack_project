@@ -25,6 +25,9 @@ const Contact = ({ isAdd, contactData, handleClose }) => {
       );
       formik.setValues({ ...rest, cid: _id });
     }
+    return () => {
+      setLoading(false);
+    };
   }, [contactData]);
 
   const loadModal = () => {
