@@ -46,10 +46,13 @@ const Home = () => {
     );
   };
 
-  const handleSearch = (searchValue) => {
-    const { inputValue, searchType } = searchValue;
-    dispatch(getAllSearchDetails({ type: searchType, value: inputValue }));
-  };
+  const handleSearch = useCallback(
+    (searchValue) => {
+      const { inputValue, searchType } = searchValue;
+      dispatch(getAllSearchDetails({ type: searchType, value: inputValue }));
+    },
+    [dispatch]
+  );
 
   const setModalShow = useCallback((value) => {
     setShowModal(value);
