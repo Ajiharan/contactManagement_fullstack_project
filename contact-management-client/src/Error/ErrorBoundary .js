@@ -1,13 +1,17 @@
-import { height } from "@mui/system";
 import React from "react";
+import * as Sentry from "@sentry/browser";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { error: "", errorInfo: "" };
+    this.state = { error: "", errorInfo: "", eventId: "" };
   }
 
   componentDidCatch(error, errorInfo) {
-    this.setState({ error, errorInfo });
+    Sentry.withScope((scope) => {
+      scope.setExtras(errorInfo);
+      const eventId = Sentry.captureException(error);
+      this.setState({ error, eventId, errorInfo });
+    });
   }
 
   reloadPage() {
@@ -20,15 +24,24 @@ class ErrorBoundary extends React.Component {
       return (
         <div style={{ overflowY: "scroll", height: "25vh" }}>
           <h2>Something went wrong.</h2>
+          <button
+            onClick={this.reloadPage}
+            className="btn btn-small btn-danger m-4"
+          >
+            Reoload Page
+          </button>
+          <button
+            className="btn btn-primary btn-small m-4"
+            onClick={() =>
+              Sentry.showReportDialog({ eventId: this.state.eventId })
+            }
+          >
+            Report feedback
+          </button>
           <details style={{ whiteSpace: "pre-wrap" }}>
             {this.state.error && this.state.error.toString()}
             <br />
-            <button
-              onClick={this.reloadPage}
-              className="btn btn-small btn-danger mt-4"
-            >
-              Reoload Page
-            </button>
+
             {this.state.errorInfo.componentStack}
           </details>
         </div>

@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllContactsDetails } from "./state-management/contact/ContactAction";
 import { Toaster } from "react-hot-toast";
-
+import * as Sentry from "@sentry/react";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +17,9 @@ function App() {
     <div className="App">
       <Toaster />
       <Header />
-      <Home />
+      <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}>
+        <Home />
+      </Sentry.ErrorBoundary>
     </div>
   );
 }

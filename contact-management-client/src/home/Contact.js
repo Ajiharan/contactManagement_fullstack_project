@@ -106,6 +106,7 @@ const Contact = ({ isAdd, contactData, handleClose }) => {
           type={"text"}
           label={"Address"}
         />
+
         {checkFormType(isAdd)}
       </form>
     </div>
