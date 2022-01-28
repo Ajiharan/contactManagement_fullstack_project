@@ -69,16 +69,18 @@ const Home = () => {
       <div className="contactContainer">
         <div className="contactHeader">
           <div className="headerFields">
-            <AnimationButton
-              name={"Add product"}
-              setShowModal={setModalShow}
-              isReset={false}
-            />
-            <AnimationButton
-              name={"Reset Data"}
-              isReset={true}
-              resetContactData={handleReset}
-            />
+            <div className="header__animation">
+              <AnimationButton
+                name={"Add product"}
+                setShowModal={setModalShow}
+                isReset={false}
+              />
+              <AnimationButton
+                name={"Reset Data"}
+                isReset={true}
+                resetContactData={handleReset}
+              />
+            </div>
             <SearchField handleSearch={handleSearch} />
           </div>
           {contactDatas?.length === 0 && !loading && (
@@ -101,6 +103,11 @@ const HomeContainer = styled.div`
   .headerFields {
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    .header__animation {
+      display: flex;
+      flex-direction: row;
+    }
   }
 `;
 

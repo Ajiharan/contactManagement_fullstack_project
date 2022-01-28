@@ -32,6 +32,7 @@ const ContactTable = ({ contactDatas, loading }) => {
         <div className="Product__list m-4 p-1">
           {contactDatas.map((res) => (
             <Contact
+              key={res._id}
               data={res}
               setShowModal={setShowModal}
               setContactData={setContactData}
