@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import ErrorBoundary from "../Error/ErrorBoundary ";
-import Contact from "../home/Contact";
+import ContactForm from "../home/ContactForm";
 import "./ContactModal.css";
 const ContactModal = ({ show, handleClose, heading, isAdd, contactData }) => {
   return (
@@ -20,7 +20,7 @@ const ContactModal = ({ show, handleClose, heading, isAdd, contactData }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Contact
+          <ContactForm
             isAdd={isAdd}
             contactData={contactData}
             handleClose={handleClose}
