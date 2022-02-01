@@ -30,10 +30,10 @@
 - dotenv : access env files
 - mongoose : access mongo-db
 - morgan : middleware
-- express-rate-limit : prevent from DOS attack
-- helmet : prevent sql injection
+- express-rate-limit : limit repeated requests to public APIs 
+- helmet : secure  Express apps by setting various HTTP headers
 - express : nodejs framework
-
+- winston : logger
 ## Note
 
 `without restarting server every time install nodemon package as globally`
