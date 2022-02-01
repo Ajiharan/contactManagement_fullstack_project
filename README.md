@@ -37,3 +37,11 @@
 ## Note
 
 `without restarting server every time install nodemon package as globally`
+
+**Screenshots**
+
+<img src="screenshots/s1.png" width="100%"/>
+
+<img src="screenshots/s2.png" width="100%"/>
+
+<img src="screenshots/s3.png" width="100%"/>
