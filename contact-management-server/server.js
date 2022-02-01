@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import ContactRouter from "./contact/ContactRouter.js";
+import { logger } from "./logs/logger.js";
 const app = express();
 app.use(express.json());
 dotenv.config();
@@ -36,4 +37,5 @@ connection.once("open", () => {
 
 app.listen(PORT, () => {
   console.log(`port listen in ${PORT}`);
+  logger.info(`port listen in ${PORT}`);
 });

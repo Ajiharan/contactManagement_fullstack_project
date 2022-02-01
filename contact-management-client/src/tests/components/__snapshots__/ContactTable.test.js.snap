@@ -13,30 +13,18 @@ exports[`should test Contact Table as valid props component 1`] = `
   <div
     className="Product__list m-4 p-1"
   >
-    <styled.div
+    <Contact
+      data={
+        Object {
+          "_id": "bb001245",
+          "email": "test@gmail.com",
+          "name": "user",
+        }
+      }
       key="bb001245"
-    >
-      <div
-        className="left"
-      >
-        <h5>
-          user
-        </h5>
-        <p>
-          test@gmail.com
-        </p>
-      </div>
-      <div
-        className="right"
-      >
-        <button
-          className="btn btn-small btn-danger"
-          onClick={[Function]}
-        >
-          select
-        </button>
-      </div>
-    </styled.div>
+      setContactData={[Function]}
+      setShowModal={[Function]}
+    />
   </div>
 </styled.div>
 `;

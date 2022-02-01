@@ -40,11 +40,8 @@ const ConactListRow = styled.div`
   .left {
     flex: 1;
     p {
-      background-color: white;
-      opacity: 0.8;
-      border-radius: 6px;
       margin-right: 1rem;
-      padding: 0.4rem;
+
       color: black;
       font-weight: bold;
     }

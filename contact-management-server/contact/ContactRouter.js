@@ -1,11 +1,7 @@
 import { ContactsSchema } from "../models/ContactSchema.js";
 import express from "express";
-
+import { logger } from "../logs/logger.js";
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  res.status(200).json("welcome user");
-});
 
 router.post("/add", async (req, res) => {
   try {
@@ -26,6 +22,7 @@ router.post("/add", async (req, res) => {
     await newContact.save();
     return res.status(200).json("contact added sucessfully");
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
@@ -38,6 +35,7 @@ router.delete("/delete/:id", async (req, res) => {
     if (!deleteData) return res.status(400).json("record does not exists");
     return res.status(200).json(deleteData);
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
@@ -57,6 +55,7 @@ router.post("/search", async (req, res) => {
     });
     return res.status(200).json(isContactExists);
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
@@ -80,6 +79,7 @@ router.put("/update/:id", async (req, res) => {
     if (contactData) return res.status(200).json("sucessfully updated");
     return res.status(400).json("something wrong cannot updated");
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
@@ -92,6 +92,7 @@ router.get("/getData/:count", async (req, res) => {
     });
     return res.status(200).json(fetchData);
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
